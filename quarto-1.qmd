@@ -1,5 +1,46 @@
 ---
 title: "Quarto 1"
 format: html
+execute: 
+  echo: false
 ---
+
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+```
+
+```{r}
+# Load required packages
+library(tidyverse)
+library(palmerpenguins)
+
+# Remove rows with missing values
+penguins_clean <- penguins %>% drop_na()
+
+# Create a beautiful scatter plot
+ggplot(data = penguins_clean, 
+       mapping = aes(x = flipper_length_mm, 
+                     y = body_mass_g, 
+                     color = species,
+                     shape = sex)) +
+  geom_point(alpha = 0.8, size = 3) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    title = "Penguin Body Mass vs. Flipper Length",
+    subtitle = "Palmer Archipelago (Antarctica)",
+    x = "Flipper Length (mm)",
+    y = "Body Mass (g)",
+    color = "Species",
+    shape = "Sex"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 14),
+    legend.position = "right"
+  )
+
+```
 
